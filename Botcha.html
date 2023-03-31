@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Webseite mit Chatbot-Funktion</title>
+</head>
+<body>
+	<h1>Chatbot</h1>
+	<form>
+		<label for="message">Nachricht eingeben:</label><br>
+		<input type="text" id="message" name="message"><br>
+		<button type="button" onclick="sendToBot()">Senden</button>
+	</form>
+
+	<script>
+		function sendToBot() {
+			var message = document.getElementById("message").value;
+			var xhr = new XMLHttpRequest();
+			var url = "https://discord.com/api/webhooks/1091398441151762432/rePzArUxrPmSUUFXbbOGLku1d7HWmZEBAPzlvlrkt6VFLc6GFnqXG0QR5ka5EoZJm_YK/botch"; // Replace WEBHOOK_ID and WEBHOOK_TOKEN with your actual webhook ID and token.
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					alert("Nachricht erfolgreich gesendet!");
+				} else {
+					alert("Fehler beim Senden der Nachricht.");
+				}
+			};
+			var data = JSON.stringify({"message": message});
+			xhr.send(data);
+		}
+	</script>
+</body>
+</html>
